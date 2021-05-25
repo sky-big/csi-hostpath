@@ -1,4 +1,4 @@
-# Kubernetes Local Volume CSI Plugin
+# Kubernetes HostPath CSI Plugin
 
 ## Overview
 
