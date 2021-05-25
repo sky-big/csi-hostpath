@@ -1,0 +1,55 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hostpath-csi-controller
+  namespace: kube-system
+  labels:
+    app: hostpath-csi-controller
+spec:
+  selector:
+    app: hostpath-csi-controller
+  ports:
+    - name: dummy
+      port: 12345
+
+---
+
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: hostpath-csi-controller
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: hostpath-csi-controller
+  serviceName: hostpath-csi-controller
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hostpath-csi-controller
+    spec:
+      serviceAccount: hostpath-csi-service-account
+      containers:
+        - name: hostpath-csi-provisioner
+          image: skybig/csi-provisioner:v1.6.0
+          args:
+            - "--csi-address=$(ADDRESS)"
+            - "--volume-name-prefix=hostpath-csi"
+            - "--feature-gates=Topology=True"
+            - "--v=5"
+          env:
+            - name: ADDRESS
+              value: /var/lib/kubelet/plugins/hostpath.csi.kubernetes.io/csi.sock
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /var/lib/kubelet/plugins/hostpath.csi.kubernetes.io
+      volumes:
+        - name: socket-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins/hostpath.csi.kubernetes.io
+            type: DirectoryOrCreate
+  updateStrategy:
+    type: RollingUpdate
