@@ -29,7 +29,7 @@ kube-system                  hostpath-csi-node-hdv6n                            
 kube-system                  hostpath-csi-node-z4qc4                                  2/2     Running            0          11m
 ```
 
-4. pvc setup host path, like this:
+4. PVC setup host path, like this:
 ```
 apiVersion: v1
 kind: PersistentVolumeClaim
