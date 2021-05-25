@@ -2,8 +2,8 @@
 
 ## Overview
 
-HostPath CSI plugin implement an interface between CSI enabled Container Orchestrator, This is exactly the same as the HostPath plugin.
-The purpose is to learn how to write CSI plugin.
+HostPath CSI plugin implement an interface between CSI enabled Container Orchestrator, This is exactly the same as the native HostPath plugin.
+This project purpose is to learn how to write CSI plugin.
 
 ## Quick Start
 
