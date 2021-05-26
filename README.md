@@ -7,7 +7,7 @@ This project purpose is to learn how to write CSI plugin.
 
 ## Quick Start
 
-### Deploy
+### Deploy Plugin
 
 1. Clone the project on your Kubernetes cluster master node:
 ```
@@ -29,7 +29,9 @@ kube-system                  hostpath-csi-node-hdv6n                            
 kube-system                  hostpath-csi-node-z4qc4                                  2/2     Running            0          11m
 ```
 
-4. PVC setup host path, like this:
+### Start Example
+
+1. PVC setup host path, like this:
 ```
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -47,7 +49,7 @@ spec:
   storageClassName: csi-hostpath
 ```
 
-5. Run example
+2. Run example
 ```
 # install storageclass
 $ kubectl apply -f ./examples/storageclass.yaml
@@ -59,7 +61,9 @@ $ kubectl apply -f ./examples/pvc.yaml
 $ kubectl apply -f ./examples/nginx.yaml
 ```
 
-5. undeploy
+### Undeploy
+
+1. undeploy
 ```
-$ make undeploy
+$ helm uninstall csi-hostpath
 ```
