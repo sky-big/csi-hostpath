@@ -39,9 +39,6 @@ type HostPathCSIDriver struct {
 	idServer         *identityServer
 	nodeServer       csi.NodeServer
 	controllerServer *controllerServer
-
-	cap   []*csi.VolumeCapability_AccessMode
-	cscap []*csi.ControllerServiceCapability
 }
 
 // NewHostPathCSIDriver create the identity/node/controller server and disk driver

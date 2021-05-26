@@ -56,7 +56,7 @@ $ kubectl apply -f ./examples/storageclass.yaml
 $ kubectl apply -f ./examples/pvc.yaml
 
 # install pod
-$ kubectl apply -f ./examples/deploy.yaml
+$ kubectl apply -f ./examples/nginx.yaml
 ```
 
 5. undeploy

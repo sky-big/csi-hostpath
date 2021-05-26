@@ -59,14 +59,8 @@ spec:
             - name: CSI_ENDPOINT
               value: unix://var/lib/kubelet/plugins/hostpath.csi.kubernetes.io/csi.sock
           volumeMounts:
-            - name: pods-mount-dir
+            - name: endpoint-dir
               mountPath: /var/lib/kubelet
-              mountPropagation: "Bidirectional"
-            - mountPath: /dev
-              mountPropagation: "HostToContainer"
-              name: host-dev
-            - mountPath: /var/log/
-              name: host-log
 
       volumes:
         - name: driver-dir
@@ -77,15 +71,9 @@ spec:
           hostPath:
             path: /var/lib/kubelet/plugins_registry
             type: DirectoryOrCreate
-        - name: pods-mount-dir
+        - name: endpoint-dir
           hostPath:
             path: /var/lib/kubelet
             type: Directory
-        - name: host-dev
-          hostPath:
-            path: /dev
-        - name: host-log
-          hostPath:
-            path: /var/log/
   updateStrategy:
     type: RollingUpdate
